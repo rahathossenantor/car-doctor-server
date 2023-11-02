@@ -54,6 +54,18 @@ async function run() {
             res.send(result);
         });
 
+        // load some data based on condition
+        app.get("/bookings", async (req, res) => {
+            let query = {};
+            if (req.query?.email) {
+                query = {
+                    email: req.query.email
+                }
+            }
+            const data = await bookingsCollection.find(query).toArray();
+            res.send(data);
+        });
+
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");

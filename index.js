@@ -10,7 +10,11 @@ const app = express();
 
 // middlewares
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+        "https://cardoctors.netlify.app",
+        "https://car-doctor-1o1.web.app",
+        "https://car-doctor-1o1.firebaseapp.com"
+    ],
     credentials: true
 }));
 app.use(express.json());
@@ -53,7 +57,7 @@ const verifyToken = async (req, res, next) => {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+//        await client.connect();
 
         const serviceCollection = client.db("carDoctorDB").collection("services");
         const bookingsCollection = client.db("carDoctorDB").collection("bookings");
